@@ -1,8 +1,9 @@
+{% load static %}
 <!doctype html>
 <html lang="en">
 
 <head>
-    <title>Title</title>
+    <title>{% block titulo %} {% endblock %}</title>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -16,9 +17,10 @@
 
     <nav class="navbar navbar-expand navbar-light bg-light">
         <div class="nav navbar-nav">
-            <a class="nav-item nav-link" href="#">inicio</a>
-            <a class="nav-item nav-link" href="#">productos</a>
-            <a class="nav-item nav-link" href="#">proveedores</a>
+            <a class="nav-item nav-link" href="{% url 'inicio' %}">inicio</a>
+            <a class="nav-item nav-link" href="{% url 'nosotros' %}">nosotros</a>
+            <a class="nav-item nav-link" href="{% url 'productos' %}">productos</a>
+            <a class="nav-item nav-link" href="{% url 'nosotros' %}">proveedores</a>
             <a class="nav-item nav-link" href="#">suministros</a>
         </div>
     </nav>
@@ -27,7 +29,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                contenido
+                {% block contenido %} {% endblock %} 
             </div>
         </div>
     </div>
