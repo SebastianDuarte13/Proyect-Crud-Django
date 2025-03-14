@@ -26,15 +26,17 @@
                     </tr>
                 </thead>
                 <tbody>
-
+                    {% for producto in productos %}
                     <tr class="">
-                        <td scope="row">1</td>
-                        <td>computador</td>
-                        <td>acer 5</td>
-                        <td>0</td>
-                        <td>1</td>
-                        <td>Editar | Borrar</td>
+                        <td scope="row">{{ producto.id }}</td>
+                        <td>{{ producto.nombre }}</td>
+                        <td>{{ producto.descripcion }}</td>
+                        <td>{{ producto.stock }}</td>
+                        <td>{{ producto.estado }}</td>
+                        <td><a name="" id="" class="btn btn-info" href="{% url 'editar' %}" role="button">Editar</a>
+                            | <a name="" id="" class="btn btn-danger" href="#" role="button">Borrar</a></td>
                     </tr>
+                    {% endfor %}
                 </tbody>
             </table>
         </div>
