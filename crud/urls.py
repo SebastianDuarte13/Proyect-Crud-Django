@@ -21,4 +21,13 @@ urlpatterns = [
     path('proveedores/eliminar/<int:id>', views.eliminar_proveedor, name='eliminar_proveedor'),
     path('proveedores/editar/<int:id>/', views.editar_proveedor, name='editar_proveedor'),
 
+    # aquí se solo las rutas de los suministros
+
+    path('suministros/', views.suministros, name='suministros'),
+    path('suministros/crear', views.crear_suministro, name='crear_suministro'),
+    path('suministros/editar', views.editar_suministro, name='editar_suministro'),
+    path('suministros/eliminar/<int:id>', views.eliminar_suministro, name='eliminar_suministro'),
+    path('suministros/editar/<int:id>/', views.editar_suministro, name='editar_suministro'),
+
+
 ]

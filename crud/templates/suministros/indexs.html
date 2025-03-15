@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block titulo %} proveedores {% endblock %}
+
+{% block contenido %}
+
+<div class="card">
+    <div class="card-header">
+        <a name="" id="" class="btn btn-success" href="{% url 'crear_suministro' %}" role="button">Agregar nuevo suministro</a>
+
+    </div>
+    <div class="card-body">
+        <h4 class="card-title">Suministros</h4>
+
+        <div class="table-responsive">
+            <table class="table table-secundary table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">ID | NOMBRE PRODUCTO</th>
+                        <th scope="col">ID | NOMBRE PROVEEDOR</th>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col">Fechas Creación</th>
+                        <th scope="col">Acciones</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for suministro in suministros %}
+                    <tr class="">
+                        <td scope="row">{{ suministro.producto.id }} | {{ suministro.producto.nombre }} </td>
+                        <td scope="row">{{ suministro.proveedor.id }} | {{ suministro.proveedor.nombre }}</td>
+                        <td>{{ suministro.cantidad }}</td>
+                        <td>{{ suministro.fecha_creacion }}</td>
+                        <td>
+                            <a class="btn btn-info" href="{% url 'editar_suministro' suministro.id %}" role="button">Editar</a>
+                            <a class="btn btn-danger" href="{% url 'eliminar_suministro' suministro.id %}" role="button"
+                               onclick="return confirm('¿Estás seguro de que deseas eliminar este suministro?');">
+                               Borrar
+                            </a>
+                        </td>                        
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+
+    </div>
+    <div class="card-footer text-muted"></div>
+</div>
+{% endblock %}

@@ -22,6 +22,7 @@ CREATE TABLE suministros (
     id_producto INT NOT NULL,
     id_proveedor INT NOT NULL,
     cantidad INT NOT NULL CHECK (cantidad > 0), -- No permite valores negativos o cero
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Fecha de creación automática
     FOREIGN KEY (id_producto) REFERENCES productos(id) ON UPDATE CASCADE ON DELETE RESTRICT,
     FOREIGN KEY (id_proveedor) REFERENCES proveedores(id) ON UPDATE CASCADE ON DELETE RESTRICT
 );

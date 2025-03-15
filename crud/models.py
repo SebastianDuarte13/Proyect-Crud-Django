@@ -33,14 +33,26 @@ class Proveedor(models.Model):
         return superior
 
 
+class Suministro(models.Model):
+    producto = models.ForeignKey('Producto', on_delete=models.CASCADE)
+    proveedor = models.ForeignKey('Proveedor', on_delete=models.CASCADE)
+    cantidad = models.IntegerField()
+    fecha_creacion = models.DateTimeField(auto_now_add=True)  
 
-# class Suministro(models.Model):
-#     producto = models.ForeignKey('Producto', on_delete=models.CASCADE)
-#     proveedor = models.ForeignKey('Proveedor', on_delete=models.CASCADE)
-#     cantidad = models.IntegerField()
+    def save(self, *args, **kwargs):
+        # Obtener el suministro previo si existe
+        if self.pk:
+            suministro_anterior = Suministro.objects.get(pk=self.pk)
+            diferencia = self.cantidad - suministro_anterior.cantidad  # Ajustar diferencia en stock
+            self.producto.stock += diferencia
+        else:
+            # Si es un nuevo suministro, simplemente sumarlo
+            self.producto.stock += self.cantidad
 
-#     def save(self, *args, **kwargs):
-#         # Aumentar el stock del producto al agregar un suministro
-#         self.producto.stock += self.cantidad
-#         self.producto.save()
-#         super().save(*args, **kwargs)
+        self.producto.save()  # Guardar cambios en el producto
+        super().save(*args, **kwargs)
+
+    class Meta:
+        db_table = "suministros"
+
+   

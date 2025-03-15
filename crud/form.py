@@ -1,5 +1,6 @@
 from django import forms
-from .models import Producto, Proveedor
+from .models import Producto, Proveedor, Suministro
+
 
 # Formulario para crear un producto
 
@@ -31,4 +32,16 @@ class ProveedorFormeditar(forms.ModelForm):
     class Meta:
         model = Proveedor
         fields = ['nombre', 'estado' ]
+
+# Formulario para crear suministro
+
+class SuministroForm(forms.ModelForm):
+    class Meta:
+        model = Suministro
+        fields = '__all__'
         
+
+class SuministroFormeditar(forms.ModelForm):
+    class Meta:
+        model = Suministro
+        fields = '__all__'

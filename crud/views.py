@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Producto, Proveedor
-from .form import ProductoForm, ProductoFormeditar, ProveedorForm, ProveedorFormeditar
+from .models import Producto, Proveedor, Suministro
+from .form import ProductoForm, ProductoFormeditar, ProveedorForm, ProveedorFormeditar, SuministroForm, SuministroFormeditar
 
 # Create your views here.
 
@@ -62,3 +62,30 @@ def eliminar_proveedor(request, id):
     proveedor = Proveedor.objects.get(id=id)
     proveedor.delete()
     return redirect('proveedores')
+
+# aqui se crean las funciones de suministros
+
+def suministros(request):
+    suministros = Suministro.objects.all()
+    return render(request, 'suministros/indexs.html', {'suministros': suministros})
+
+def crear_suministro(request):
+    formulario = SuministroForm(request.POST or None, request.FILES or None)
+    if formulario.is_valid():
+        formulario.save()
+        return redirect('proveedores')
+    return render(request, 'proveedores/crear.html', {'formulario': formulario})
+
+def editar_suministro(request, id):
+    suministro = Suministro.objects.get(id=id)
+    formulario = SuministroFormeditar(request.POST or None, request.FILES or None, instance=suministro)
+    if formulario.is_valid() and request.POST:
+        formulario.save()
+        return redirect('suministros')
+    return render(request, 'suministros/editar.html', {'formulario': formulario})
+
+def eliminar_suministro(request, id):
+    suministro = Suministro.objects.get(id=id)
+    suministro.delete()
+    return redirect('suministros')
+
