@@ -17,13 +17,21 @@ class Producto(models.Model):
         return superior
 
 
-#  class Proveedor(models.Model):
-#     id = models.AutoField(primary_key=True)
-#     nombre = models.CharField(max_length=100, verbose_name="Nombre")
-#     estado = models.IntegerField(
-#         choices=[(1, "Activo"), (0, "Inactivo")], 
-#         default=1  # Siempre inicia en 1 (activo)
-#     )
+class Proveedor(models.Model):
+    id = models.AutoField(primary_key=True)
+    nombre = models.CharField(max_length=100, verbose_name="Nombre")
+    estado = models.IntegerField(
+        choices=[(1, "Activo"), (0, "Inactivo")], 
+        default=1  # Siempre inicia en 1 (activo)
+    )
+
+    class Meta:
+        db_table = "proveedores" 
+
+    def __str__(self):
+        superior = "Proveedor: " + self.nombre
+        return superior
+
 
 
 # class Suministro(models.Model):

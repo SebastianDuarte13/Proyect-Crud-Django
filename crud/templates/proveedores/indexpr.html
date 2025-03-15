@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block titulo %} proveedores {% endblock %}
+
+{% block contenido %}
+
+<div class="card">
+    <div class="card-header">
+        <a name="" id="" class="btn btn-success" href="{% url 'crear_proveedor' %}" role="button">Agregar nuevo
+            proveedor</a>
+
+    </div>
+    <div class="card-body">
+        <h4 class="card-title">Proveedores</h4>
+
+        <div class="table-responsive">
+            <table class="table table-secundary table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col">Acciones</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for proveedor in proveedores %}
+                    <tr class="">
+                        <td scope="row">{{ proveedor.id }}</td>
+                        <td>{{ proveedor.nombre }}</td>
+                        <td>{{ proveedor.get_estado_display }}</td>
+                        <td><a name="" id="" class="btn btn-info" href="{% url 'editar_proveedor' proveedor.id %}" role="button">Editar</a> ㅤ | ㅤ
+                            <a name="" id="" class="btn btn-danger" href="{% url 'eliminar_proveedor' proveedor.id %}" role="button"
+                                onclick="return confirm('¿Estás seguro de que deseas eliminar este proveedor?');"> Borrar
+                            </a>
+
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+
+    </div>
+    <div class="card-footer text-muted"></div>
+</div>
+{% endblock %}

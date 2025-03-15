@@ -33,8 +33,9 @@
                         <td>{{ producto.descripcion }}</td>
                         <td>{{ producto.stock }}</td>
                         <td>{{ producto.get_estado_display }}</td>
-                        <td><a name="" id="" class="btn btn-info" href="{% url 'editar' producto.id %}" role="button">Editar</a>
-                            | <a name="" id="" class="btn btn-danger" href="{% url 'eliminar' producto.id %}" role="button">Borrar</a>
+                        <td><a name="" id="" class="btn btn-info" href="{% url 'editar' producto.id %}" role="button">Editar</a> |
+                            <a name="" id="" class="btn btn-danger" href="{% url 'eliminar' producto.id %}" role="button"
+                            onclick="return confirm('¿Estás seguro de que deseas eliminar este producto?');">Borrar</a>
                            </td>
                     </tr>
                     {% endfor %}
