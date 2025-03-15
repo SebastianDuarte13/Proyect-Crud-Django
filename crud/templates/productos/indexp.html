@@ -33,8 +33,9 @@
                         <td>{{ producto.descripcion }}</td>
                         <td>{{ producto.stock }}</td>
                         <td>{{ producto.estado }}</td>
-                        <td><a name="" id="" class="btn btn-info" href="{% url 'editar' %}" role="button">Editar</a>
-                            | <a name="" id="" class="btn btn-danger" href="#" role="button">Borrar</a></td>
+                        <td><a name="" id="" class="btn btn-info" href="{% url 'editar' producto.id %}" role="button">Editar</a>
+                            | <a name="" id="" class="btn btn-danger" href="{% url 'eliminar' producto.id %}" role="button">Borrar</a>
+                           </td>
                     </tr>
                     {% endfor %}
                 </tbody>

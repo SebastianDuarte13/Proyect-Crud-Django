@@ -9,7 +9,8 @@
             name="{{ campo.name }}" 
             id=""
             aria-describedby="helpId"
-            placeholder="{{ campo.label }}" />
+            placeholder="{{ campo.label }}"
+            value="{{ campo.value | default:'' }}" />
         </div>
         
     {% endfor %}
@@ -20,5 +21,14 @@
         type="submit"
         value="enviar informacion"
     />
+    <a
+        name=""
+        id=""
+        class="btn btn-primary"
+        href="{% url 'productos' %}"
+        role="button"
+        >CANCELAR</a
+    >
+    
     
 </form>

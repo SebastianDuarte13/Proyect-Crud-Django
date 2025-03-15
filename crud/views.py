@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Producto
-from .form import ProductoForm
+from .form import ProductoForm, ProductoFormeditar
 
 # Create your views here.
 
@@ -18,5 +18,14 @@ def crear(request):
         formulario.save()
         return redirect('productos')
     return render(request, 'productos/crear.html', {'formulario': formulario})
-def editar(request):
-    return render(request, 'productos/editar.html')
+def editar(request, id):
+    producto = Producto.objects.get(id=id)
+    formulario = ProductoFormeditar(request.POST or None, request.FILES or None, instance=producto)
+    if formulario.is_valid() and request.POST:
+        formulario.save()
+        return redirect('productos')
+    return render(request, 'productos/editar.html', {'formulario': formulario})
+def eliminar(request, id):
+    producto = Producto.objects.get(id=id)
+    producto.delete()
+    return redirect('productos')
