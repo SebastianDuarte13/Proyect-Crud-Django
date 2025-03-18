@@ -6,36 +6,43 @@ from .form import ProductoForm, ProductoFormeditar, ProveedorForm, ProveedorForm
 # Create your views here.
 
 def inicio(request):
+    # Renderiza la página de inicio
     return render(request, 'paginas/inicio.html')
 
 def nosotros(request):
+    # Renderiza la página de información sobre la empresa
     return render(request, 'paginas/nosotros.html')
 
-# aqui se crean las funciones para los productos
+# Aquí se crean las funciones para manejar los productos
 
 def productos(request):
+    # Obtiene todos los productos de la base de datos
     productos = Producto.objects.all()
     return render(request, 'productos/indexp.html', {'productos': productos})
 
 def crear(request):
+    # Procesa el formulario para crear un nuevo producto
     formulario = ProductoForm(request.POST or None, request.FILES or None)
-    if formulario.is_valid():
+    if formulario.is_valid():  # Si el formulario es válido, guarda el producto
         formulario.save()
-        return redirect('productos')
+        return redirect('productos')  # Redirige a la lista de productos
     return render(request, 'productos/crear.html', {'formulario': formulario})
 
 def editar(request, id):
+    # Obtiene el producto a editar por su ID
     producto = Producto.objects.get(id=id)
     formulario = ProductoFormeditar(request.POST or None, request.FILES or None, instance=producto)
-    if formulario.is_valid() and request.POST:
+    if formulario.is_valid() and request.POST:  # Si el formulario es válido, guarda los cambios
         formulario.save()
-        return redirect('productos')
+        return redirect('productos')  # Redirige a la lista de productos
     return render(request, 'productos/editar.html', {'formulario': formulario})
 
 def eliminar(request, id):
+    # Obtiene el producto por su ID y lo elimina
     producto = Producto.objects.get(id=id)
     producto.delete()
-    return redirect('productos')
+    return redirect('productos')  # Redirige a la lista de productos
+
 
 # aqui se crean las funciones para los proveedores
 
